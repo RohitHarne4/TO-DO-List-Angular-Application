@@ -1,0 +1,118 @@
+<div class="container">
+  <h3>{{ title }}</h3>
+  <div class="search-container" *ngIf="tasks.length > 0">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search tasks..."
+      class="search-input"
+    />
+  </div>
+  <form (ngSubmit)="addOrUpdateTask()" #taskForm="ngForm">
+    
+    <div class="Form">
+    <div>
+      <label for="taskName">Task Name</label>
+      <input
+        type="text"
+        [(ngModel)]="newTask.name"
+        name="taskName"
+        placeholder="Enter Task Name"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="assignedTo">Assigned To</label>
+      <input
+        type="text"
+        [(ngModel)]="newTask.assignedTo"
+        name="assignedTo"
+        placeholder="Enter Assigned To"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="status">Status</label>
+      <input
+        type="text"
+        [(ngModel)]="newTask.status"
+        name="status"
+        placeholder="Enter Status"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="dueDate">Due Date</label>
+      <input
+        type="date"
+        [(ngModel)]="newTask.dueDate"
+        name="dueDate"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="priority">Priority</label>
+      <input
+        type="text"
+        [(ngModel)]="newTask.priority"
+        name="priority"
+        placeholder="Enter Priority"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="comments">Comments</label>
+      <input
+        type="text"
+        [(ngModel)]="newTask.comments"
+        name="comments"
+        placeholder="Any Comments"
+      />
+    </div>
+  </div>
+    <div>
+      <button type="submit" class="add-task-button">{{ isEditMode ? 'Update Task' : 'Add Task' }}</button>
+    </div>
+  </form>
+  <div *ngIf="tasks.length > 0" class="TableResponsive">
+    <table cellpadding="10" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Task Name</th>
+          <th>Assigned To</th>
+          <th>Status</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+          <th>Comments</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of getFilteredTasks(); let i = index">
+          <td>
+            <input type="checkbox" [(ngModel)]="task.selected" (change)="updateDeleteButtonVisibility()" />
+          </td>
+          <td>{{ task.name }}</td>
+          <td>{{ task.assignedTo }}</td>
+          <td>{{ task.status }}</td>
+          <td>{{ task.dueDate }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.comments }}</td>
+          <td>
+            <div class="BtnSection">
+              <button (click)="editTask(i)">Edit</button>
+              <button (click)="confirmDelete(i)">Remove</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button *ngIf="showDeleteButton" (click)="deleteSelectedTasks()" class="remove">Delete Selected</button>
+  </div>
+</div>
