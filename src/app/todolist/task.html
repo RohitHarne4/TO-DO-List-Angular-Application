@@ -1,0 +1,170 @@
+<div class="container">
+    <h1>{{ title }}</h1>
+  
+    <!-- Add New Task Form -->
+    <form (ngSubmit)="addTask()" #taskForm="ngForm">
+      <input 
+        type="text" 
+        [(ngModel)]="newTask.name" 
+        name="taskName" 
+        placeholder="Task Name" 
+        required 
+      />
+      <input 
+        type="text" 
+        [(ngModel)]="newTask.assignedTo" 
+        name="assignedTo" 
+        placeholder="Assigned To" 
+        required 
+      />
+      <input 
+        type="text" 
+        [(ngModel)]="newTask.status" 
+        name="status" 
+        placeholder="Status" 
+        required 
+      />
+      <input 
+        type="date" 
+        [(ngModel)]="newTask.dueDate" 
+        name="dueDate" 
+        required 
+      />
+      <input 
+        type="text" 
+        [(ngModel)]="newTask.priority" 
+        name="priority" 
+        placeholder="Priority" 
+        required 
+      />
+      <input 
+        type="text" 
+        [(ngModel)]="newTask.comments" 
+        name="comments" 
+        placeholder="Comments" 
+      />
+      <button type="submit">Add Task</button> <!-- Linked to form submission -->
+    </form>
+  
+    <!-- Task Table -->
+    <table  cellpadding="10" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Task Name</th>
+          <th>Assigned To</th>
+          <th>Status</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+          <th>Comments</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks; let i = index">
+          <td>{{ task.name }}</td>
+          <td>{{ task.assignedTo }}</td>
+          <td>{{ task.status }}</td>
+          <td>{{ task.dueDate }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.comments }}</td>
+          <td>
+            <!-- Remove button with index passed to deleteTask function -->
+            <button (click)="deleteTask(i)">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- If no tasks are present -->
+    <!-- <p *ngIf="tasks.length === 0">No tasks available. Add a task to get started!</p> -->
+  </div>
+  <div class="container">
+    <h1>{{ title }}</h1>
+  
+    <!-- Button to Open Modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+      Open modal
+    </button>
+  
+    <!-- Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+  
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Task List</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+  
+          <!-- Modal body -->
+          <div class="modal-body">
+            <!-- Task Table -->
+            <table cellpadding="10" cellspacing="0" style="width: 100%;">
+              <thead>
+                <tr>
+                  <th>Task Name</th>
+                  <th>Assigned To</th>
+                  <th>Status</th>
+                  <th>Due Date</th>
+                  <th>Priority</th>
+                  <th>Comments</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let task of tasks; let i = index">
+                  <td>{{ task.name }}</td>
+                  <td>{{ task.assignedTo }}</td>
+                  <td>{{ task.status }}</td>
+                  <td>{{ task.dueDate }}</td>
+                  <td>{{ task.priority }}</td>
+                  <td>{{ task.comments }}</td>
+                  <td>
+                    <!-- Remove button with index passed to deleteTask function -->
+                    <button (click)="deleteTask(i)">Remove</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+  
+            <!-- If no tasks are present -->
+            <p *ngIf="tasks.length === 0">No tasks available. Add a task to get started!</p>
+          </div>
+  
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          Modal body..
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
